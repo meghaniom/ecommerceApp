@@ -50,3 +50,34 @@ exports.register = async (req, res) => {
     res.status(500).json({message : "Something went wrong.", error : error.message});
   }
 };
+
+
+ exports.login = async(req, res) => {
+  try {
+    const {email, password} = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ message: "Please provide both email and password" });
+    }
+      const loginUser = await userModel.findOne({ email });
+      // console.log('loginuser', loginUser);
+
+       if(!loginUser) {
+         return res.status(400).json({message : "User not found"});
+       }
+    const  isPassword  = await bcrypt.compare(password, loginUser.password);
+    // console.log('isPassword',isPassword);
+
+     if(!isPassword) {
+      return res.status(500).json({message : "Invalid password."});
+     }
+      const token = jwt.sign({id: loginUser._id, email: loginUser.email, role:loginUser.role}, process.env.JWT_SECRET,{
+        expiresIn : "7d",
+      });
+      //  console.log("token", token);
+       return res.status(201).json({message : "Login is Successfully", token, role: loginUser.role });
+  }
+  catch(error) {
+    res.status(500).json({message : "Something went wrong.", error : error.message});
+  }
+ };
