@@ -15,7 +15,7 @@ const Signup = () => {
     setError("");
     setSuccess("");
     setFormData({
-      ...formData,
+      
       [e.target.name]: [e.target.value],
     });
   };
@@ -33,7 +33,7 @@ const Signup = () => {
   };
   return (
     <div className="flex justifu-center items-center min-h-screen bg-gray-100">
-      <form onSubmit={handelSubmitf} className="bg-white shadow-md rounded px-8 pb-8 w-full  max-w-md">
+      <form onSubmit={handelSubmit} className="bg-white shadow-md rounded px-8 pb-8 w-full  max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
         {success && <p className="text-green-500 text-sm mb-4">{success}</p>}

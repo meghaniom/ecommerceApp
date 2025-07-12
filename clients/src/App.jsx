@@ -1,12 +1,13 @@
+import Signup from "./component/auth/Signup"
 
-import './App.css'
+
 
 function App() {
 
 
   return (
     <>
-      
+    <Signup/>
     </>
   )
 }
