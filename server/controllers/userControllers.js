@@ -4,8 +4,8 @@ const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
   try {
-    const { username, email, password, role } = req.body;
-    if (!username || !email || !password || !role) {
+    const { userName, email, password, role } = req.body;
+    if (!userName || !email || !password || !role) {
       return res.status(400).json({ message: "Please Provide all the fields" });
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -18,7 +18,7 @@ exports.register = async (req, res) => {
       return res.status(400).json({
         message: "Please to provide a password of at least 8 characters"});
     }
-     if (username.length <5) {
+     if (userName.length <5) {
          return res.status(400).json({message : "userName must be at least 5 characters long."});
      }
 
@@ -31,15 +31,15 @@ exports.register = async (req, res) => {
       return res.status(400).json({ message: "Email already registered." });
     }
 
-    const existingUsername = await userModel.findOne({ username });
-    if (existingUsername) {
+    const existingUsername = await userModel.findOne({ userName });
+    if (existingUserName) {
       return res.status(400).json({ message: "Username already taken." });
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
     const newUser = await userModel.create({
         email,
-        username,
+        userName,
         password : passwordHash,
         role 
     });
