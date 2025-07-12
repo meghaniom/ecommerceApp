@@ -3,10 +3,10 @@ import { SignupUser } from "../../service/auth";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: "s@gmail.com",
+    password: "12345678",
     role: "customer",
-    userName: "",
+    username: "asasasasa",
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -21,11 +21,12 @@ const Signup = () => {
   };
 
   const handelSubmit =async(e) => {
+    console.log(formData)
     e.preventDefault();
     const result = await SignupUser(formData);
     if(result.success) {
       setSuccess(result.data.message);
-      setFormData({email: "", password : "", role:"customer",userName: ""});
+      setFormData({email: "", password : "", role:"customer",username: ""});
     }
     else {
        setError(result.message);
@@ -46,7 +47,7 @@ const Signup = () => {
             onChange={handelChange}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             required
-            value={formData.userName}
+           value={formData.username} 
           />
         </div>
         <div className="mb-4">
@@ -59,7 +60,7 @@ const Signup = () => {
         </div>
          <div className=" mb-6">
           <label  className="block text-gray-700 text-sm font-bold mb-2">Role</label>
-          <select name="role"  onChange={handelChange}  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700">
+          <select name="role"  onChange={handelChange}  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" value={formData.role} >
             <option value="customer">Customer</option>
             <option value="admin">admin</option>
           </select>
