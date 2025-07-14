@@ -3,8 +3,12 @@ import { API_BASE_URL } from "../../config/constans";
 
    export  const getProduct = async() => {
     try {
-
-        const response = await axios.get(`${API_BASE_URL}/products/getProduct`);
+   const token = localStorage.getItem("token");
+        const response = await axios.get(`${API_BASE_URL}/product/getProduct`, {
+            headers : {
+                Authorization : `Bearer ${token}`,
+            }
+        });
          return  response.data;
     }
     catch (err) {
