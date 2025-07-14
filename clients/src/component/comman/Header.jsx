@@ -8,7 +8,9 @@ const Header = () => {
         
         <div className="text-2xl font-bold text-blue-600">ShopEase</div>
 
-        
+
+       
+
         <nav className="hidden md:flex space-x-6 text-gray-700 font-medium">
           <a href="/" className="hover:text-blue-600">Home</a>
           <a href="/shop" className="hover:text-blue-600">Shop</a>
@@ -17,6 +19,8 @@ const Header = () => {
         </nav>
 
     
+
+
         <div className="hidden lg:flex items-center border border-gray-300 rounded-md px-2 py-1 w-72">
           <input
             type="text"
@@ -38,4 +42,7 @@ const Header = () => {
   );
 };
 
+
 export default Header;
+
+
