@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const dbConnect = require('./config/dbConnect');
 const userRoutes = require('./routes/userRoutes');
+const productRoutes = require('./routes/productRoute')
 const cors = require('cors');
 
 const app = express();
@@ -23,9 +24,12 @@ dbConnect()
 
 
 app.use(express.json());
+app.use('/uploads',express.static('uploads'));
 
 
 app.use("/api/v1/auth", userRoutes);
+app.use("/api/v1/product",productRoutes );
+
 
 
 
