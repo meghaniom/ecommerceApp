@@ -8,6 +8,8 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const result = await getProduct();
+      console.log("result", result);
+
       if (result?.products) {
         setProducts(result.products);
       } else {
@@ -32,7 +34,7 @@ const Products = () => {
                 key={product._id}
                 className="bg-white p-4 rounded-md shadow-sm"
               >
-                <div className="h-40 bg-gray-200 mb-4 rounded-md overflow-hidden">
+                <div className="h-90 bg-gray-200 mb-4 rounded-md overflow-hidden">
                   {product.image ? (
                     <img
                       src={`http://localhost:3000/uploads/${product.image}`}
