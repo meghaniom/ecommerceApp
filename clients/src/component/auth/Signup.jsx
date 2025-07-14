@@ -1,12 +1,22 @@
+
 import React, { Suspense, useState } from "react";
+
+import React, { useState } from "react"; 
 import { SignupUser } from "../../service/auth";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
+
     email: "s@gmail.com",
     password: "12345678",
     role: "customer",
     username: "asasasasa",
+
+    email: "",
+    password: "",
+    role: "customer",
+    userName: "",
+
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -14,27 +24,30 @@ const Signup = () => {
   const handelChange = (e) => {
     setError("");
     setSuccess("");
+
     setFormData({
       
       [e.target.name]: [e.target.value],
     });
   };
 
-  const handelSubmit =async(e) => {
-    console.log(formData)
+  const handelSubmit = async (e) => {
     e.preventDefault();
     const result = await SignupUser(formData);
-    if(result.success) {
+    if (result.success) {
       setSuccess(result.data.message);
-      setFormData({email: "", password : "", role:"customer",username: ""});
-    }
-    else {
-       setError(result.message);
+      setFormData({ email: "", password: "", role: "customer", userName: "" });
+    } else {
+      setError(result.message);
+
     }
   };
   return (
     <div className="flex justifu-center items-center min-h-screen bg-gray-100">
-      <form onSubmit={handelSubmit} className="bg-white shadow-md rounded px-8 pb-8 w-full  max-w-md">
+      <form
+        onSubmit={handelSubmit}
+        className="bg-white shadow-md rounded px-8 pb-8 w-full  max-w-md"
+      >
         <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
         {success && <p className="text-green-500 text-sm mb-4">{success}</p>}
@@ -47,6 +60,7 @@ const Signup = () => {
             onChange={handelChange}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             required
+
            value={formData.username} 
           />
         </div>
@@ -68,9 +82,12 @@ const Signup = () => {
          <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ">
           Signup
          </button>
-      </form>
-    </div>
+         
+         </form>
+         </div>
+        
   );
-};
+}
+
 
 export default Signup;
