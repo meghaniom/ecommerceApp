@@ -1,25 +1,15 @@
 
-import Signup from "./component/auth/Signup"
 
+import AppRoutes from "./routes/AppRoutes";
 
-
-
-
-import Signup from './component/auth/Signup'
 
 
 function App() {
-
-
   return (
     <>
-
-    <Signup/>
-
-     
-
+      <AppRoutes />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
