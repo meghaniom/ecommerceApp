@@ -4,53 +4,47 @@ const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
   try {
-    const { username, email, password, role } = req.body;
-    if (!username || !email || !password || !role) {
-      return res.status(400).json({ message: "Please Provide all the fields" });
+    const { email, userName, password, role } = req.body;
+    if (!email || !password || !userName || !role) {
+      return res.status(400).json({ message: "All fields are required." });
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
+      return res.status(400).json({ message: "Invalid email format." });
+    }
+    if (password.length < 6) {
       return res
         .status(400)
-        .json({ message: "Please provide a valid email address" });
+        .json({ message: "Password must be at least 6 characters long." });
     }
-    if (password.length < 8) {
-      return res.status(400).json({
-        message: "Please to provide a password of at least 8 characters"});
+    if (userName.length < 3) {
+      return res
+        .status(400)
+        .json({ message: "userName must be at least 3 characters long." });
     }
-     if (username.length <5) {
-         return res.status(400).json({message : "userName must be at least 5 characters long."});
-     }
+    const validRoles = ["customer","admin"];
+    if (!validRoles.includes(role)) {
+      return res.status(400).json({message : "Invalid role. Must be'User ' or 'admin"})
+    }
+    const user = await userModel.findOne({ email });
 
-      const roleValidation = ["admin", "customer"];
-      if(!roleValidation.includes(role)){
-        return res.status(400).json({message : "Role must be either admin or customer"});
-      }
-       const existingEmail = await userModel.findOne({ email });
-    if (existingEmail) {
-      return res.status(400).json({ message: "Email already registered." });
+    if (user) {
+      return res.status(400).json({ message: "User already exists." });
     }
-
-    const existingUsername = await userModel.findOne({ username });
-    if (existingUsername) {
-      return res.status(400).json({ message: "Username already taken." });
-    }
-
-    const passwordHash = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await userModel.create({
-        email,
-        username,
-        password : passwordHash,
-        role 
+      email,
+      userName,
+      password: hashedPassword,
+      role,
     });
+     console.log('newUser', newUser);
     await newUser.save();
-     res.status(201).json({message : "user Register is  Successfully."});
-      
+    res.status(200).json({ message: "User created successfully." });
   } catch (error) {
-    res.status(500).json({message : "Something went wrong.", error : error.message});
+    res.status(500).json({ message: error.message });
   }
 };
-
 
  exports.login = async(req, res) => {
   try {
