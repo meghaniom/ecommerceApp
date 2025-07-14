@@ -21,11 +21,11 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.3",
     "multer": "^2.0.1",
-<<<<<<< HEAD
+
     "nodemon": "^3.1.10",
     "tailwindcss": "^4.1.11"
-=======
-    "nodemon": "^3.1.10"
->>>>>>> backend
+
+    
+
   }
 }
