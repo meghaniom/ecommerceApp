@@ -24,12 +24,12 @@ const Login = () => {
     const res = await Loginuser(loginData);
 
     if (res.success) {
-      setLoginSuccess(res.data.message); // ✅ Correct message
+      setLoginSuccess(res.data.message); 
       setLoginError("");
       localStorage.setItem("token", res.data.token);
-      localStorage.setItem("role", res.data.role); // ✅ Use a different key for role
+      localStorage.setItem("role", res.data.role); 
     } else {
-      setLoginError(res.error); // ✅ Show error from backend
+      setLoginError(res.error); 
       setLoginSuccess("");
     }
   };
