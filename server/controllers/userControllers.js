@@ -81,3 +81,12 @@ exports.register = async (req, res) => {
     res.status(500).json({message : "Something went wrong.", error : error.message});
   }
  };
+
+  exports.logout = async(req, res) => {
+    try {
+      res.status(200).json({message : "Logout successfully"});
+    }
+    catch (error) {
+       res.status(500).json({message : "Something went wrong.", error : error.message});
+    }
+  };
