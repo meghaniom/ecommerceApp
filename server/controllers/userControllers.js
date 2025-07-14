@@ -31,10 +31,10 @@ exports.register = async (req, res) => {
       return res.status(400).json({ message: "Email already registered." });
     }
 
-    const existingUsername = await userModel.findOne({ userName });
-    if (existingUserName) {
-      return res.status(400).json({ message: "Username already taken." });
-    }
+    // const existingUsername = await userModel.findOne({ userName });
+    // if (existingUserName) {
+    //   return res.status(400).json({ message: "Username already taken." });
+    // }
 
     const passwordHash = await bcrypt.hash(password, 10);
     const newUser = await userModel.create({
