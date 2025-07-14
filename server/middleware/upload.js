@@ -11,8 +11,8 @@ const path = require('path');
         cb(null, uniqueName + ext);
     }
  });
+ const fileFilter = (req, file, cb) => {
 
-  const fileFilter = (req, file, cb) => {
     const allowTypes = /jpeg|jpg|png|gif|webp/;
     const ext = path.extname(file.originalname).toLowerCase();
     const mime  = file.mimetype;
@@ -23,14 +23,12 @@ const path = require('path');
         cb (new Error('Only image files(jpeg, jpg, png, gif, webp) are allowed.'));
      }
   };
-
-
   const upload = multer ({
+
     storage: storage,
     fileFilter : fileFilter,
     limits : {
         fileSize  : 5 * 1024 * 1024
     }
   });
-
    module.exports = upload;
