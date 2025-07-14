@@ -1,5 +1,6 @@
 import React, { Suspense, useState } from "react";
 import { SignupUser } from "../../service/auth";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -10,29 +11,33 @@ const Signup = () => {
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const  navigate = useNavigate("");
 
-  const handelChange = (e) => {
-    setError("");
-    setSuccess("");
-    setFormData({
-      
-      [e.target.name]: [e.target.value],
-    });
-  };
+  const handleChange = (e) => {
+  setError("");
+  setSuccess("");
+  setFormData((prev) => ({
+    ...prev,
+    [e.target.name]: e.target.value, 
+  }));
+};
 
   const handelSubmit =async(e) => {
     e.preventDefault();
     const result = await SignupUser(formData);
+    
     if(result.success) {
       setSuccess(result.data.message);
       setFormData({email: "", password : "", role:"customer",userName: ""});
     }
+  
     else {
-       setError(result.message);
+       setError(result.error);
     }
+      navigate("/login");
   };
   return (
-    <div className="flex justifu-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form onSubmit={handelSubmit} className="bg-white shadow-md rounded px-8 pb-8 w-full  max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
@@ -43,7 +48,8 @@ const Signup = () => {
           </label>
           <input
             type="text"
-            onChange={handelChange}
+            name="userName"
+            onChange={handleChange}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             required
             value={formData.userName}
@@ -51,15 +57,15 @@ const Signup = () => {
         </div>
         <div className="mb-4">
           <label  className="block text-gray-700 text-sm font-bold mb-2"> Email</label>
-          <input type="text" onChange={handelChange} className="shadow  appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required value={formData.email} />
+          <input type="text" name="email" onChange={handleChange} className="shadow  appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required value={formData.email} />
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">Password</label>
-          <input type="text" onChange={handelChange} className="shadow appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required value={formData.password} />
+          <input type="text" name="password" onChange={handleChange} className="shadow appearance-none border rounded w-full  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required value={formData.password} />
         </div>
          <div className=" mb-6">
           <label  className="block text-gray-700 text-sm font-bold mb-2">Role</label>
-          <select name="role"  onChange={handelChange}  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700">
+          <select name="role"  onChange={handleChange}  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700">
             <option value="customer">Customer</option>
             <option value="admin">admin</option>
           </select>

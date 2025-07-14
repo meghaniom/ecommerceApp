@@ -1,4 +1,5 @@
-import Signup from "./component/auth/Signup"
+
+import AppRoutes from "./routes/AppRoutes"
 
 
 
@@ -7,7 +8,7 @@ function App() {
 
   return (
     <>
-    <Signup/>
+    <AppRoutes/>
     </>
   )
 }
