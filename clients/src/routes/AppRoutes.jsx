@@ -8,6 +8,10 @@ import Login from '../component/auth/Login'
 
 import HomePage from '../pages/homePage'
 
+
+
+import ProductAdd from '../admin/ProductAdd'
+
 const AppRoutes = () => {
   return (
    <BrowserRouter>
@@ -18,6 +22,10 @@ const AppRoutes = () => {
    
 
    <Route path='/homePage' element= {<HomePage/>} />
+
+
+
+   <Route path='/addProduct' element ={<ProductAdd/>} />
 
    </Routes>
    </BrowserRouter>
