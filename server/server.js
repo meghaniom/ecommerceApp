@@ -32,12 +32,6 @@ app.use('/uploads',express.static('uploads'));
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/product",productRoutes );
 
-
-
-
-
-
-
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
 });
