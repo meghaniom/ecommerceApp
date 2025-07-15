@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getProduct } from "../../service/product/Product";
+import { addCart } from "../../service/cart";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -19,6 +20,15 @@ const Products = () => {
     };
     fetchProducts();
   }, []);
+
+   const handleAddToCart =async (product)=> {
+    const data = {
+      productId : product._id,
+      quantity: 1,
+    };
+    const result = await addCart(data);
+    alert(result);
+   }
   return (
     <section className="py-16 px-6 bg-gray-100">
       <h2 className="text-2xl font-semibold mb-6 text-gray-800 max-w-7xl mx-auto">
@@ -51,7 +61,8 @@ const Products = () => {
                   {product.productTitle}
                 </h3>
                 <p className="text-sm text-gray-500 mb-2">₹{product.price}</p>
-                <button className="bg-blue-600 text-white w-full py-1 rounded hover:bg-blue-700">
+                <button className="bg-blue-600 text-white w-full py-1 rounded hover:bg-blue-700" 
+                onClick={()=> handleAddToCart(product)}>
                   Add to Cart
                 </button>
               </div>

@@ -12,6 +12,10 @@ import HomePage from '../pages/homePage'
 
 import ProductAdd from '../admin/ProductAdd'
 
+
+
+import Cart from '../pages/Cart'
+
 const AppRoutes = () => {
   return (
    <BrowserRouter>
@@ -27,6 +31,10 @@ const AppRoutes = () => {
 
 
    <Route path='/addProduct' element ={<ProductAdd/>} />
+
+
+
+   <Route path='/cart' element={<Cart/>} />
 
    </Routes>
    </BrowserRouter>
