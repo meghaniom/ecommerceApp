@@ -98,3 +98,26 @@ console.error(error);
     res.status(500).json({ error: "Failed to remove item from cart" });
     }
 };
+
+
+ exports.getCart  = async (req, res) => {
+    const userId = req.user.id;
+
+    try {
+        const cart = await Cart.findOne({userId}).populate({
+            path : "cartItems.productId",
+            select  : "productTitle price image",
+        });
+         if (!cart) {
+             return res.status(404).json({message : "cart  is empty"});
+         }
+          res.status(200).json({message : "cart fetched successfully",
+            cartItems : cart.cartItems,
+            totalPrice : cart.totalPrice,
+          });
+    }
+     catch(error) {
+         return res.status(500).json({error : "Failed to fetch cart"});
+     }
+
+ };
