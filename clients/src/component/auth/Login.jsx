@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Loginuser } from '../../service/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -9,7 +10,7 @@ const Login = () => {
 
   const [loginError, setLoginError] = useState("");
   const [loginSuccess, setLoginSuccess] = useState("");
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setLoginError("");
     setLoginSuccess("");
@@ -32,6 +33,7 @@ const Login = () => {
       setLoginError(res.error); 
       setLoginSuccess("");
     }
+    navigate('/homepage')
   };
 
   return (
