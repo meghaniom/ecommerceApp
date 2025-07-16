@@ -38,7 +38,9 @@ export const removeWatchList = async (userId, productId) => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      data: { productId, user },
+
+      data: { productId, userId },
+
     });
     return response.data.message || "Product removed successfully";
   } catch (error) {
