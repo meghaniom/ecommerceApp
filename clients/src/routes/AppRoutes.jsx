@@ -7,6 +7,7 @@ import HomePage from '../pages/homePage'
 import ProductAdd from '../admin/ProductAdd'
 import Cart from '../pages/Cart'
 import WatchList from '../pages/WatchList'
+import AdminDashboard from '../admin/AdminDashboard'
 const AppRoutes = () => {
   return (
    <BrowserRouter>
@@ -14,7 +15,9 @@ const AppRoutes = () => {
     <Route path='/' element = {<Signup/>} />
     <Route path='/login' element ={<Login/>} />
    <Route path='/homePage' element= {<HomePage/>} />
-   <Route path='/addProduct' element ={<ProductAdd/>} />
+   <Route path='/adminAddProduct' element ={<ProductAdd/>} />
+   <Route path='/adminDashboard' element ={<AdminDashboard/>} />
+
    <Route path='/cart' element={<Cart/>} />
    <Route path='/watchList' element ={<WatchList/>} />
    </Routes>
