@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getProduct } from "../../service/product/Product";
 import { addCart } from "../../service/cart";
+import { addWatchList } from "../../service/watchList";
+
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -28,6 +30,18 @@ const Products = () => {
     };
     const result = await addCart(data);
     alert(result);
+   };
+
+   const handleAddToWatchList = (product) => {
+    const data = {
+      productId : product._id,
+    watchList : true,
+    };
+
+    const result = addWatchList(data);
+    alert(result);
+    console.log("WatchList added:", result);
+    
    }
   return (
     <section className="py-16 px-6 bg-gray-100">
@@ -60,6 +74,10 @@ const Products = () => {
                 <h3 className="font-medium text-gray-700 truncate">
                   {product.productTitle}
                 </h3>
+                <button className="bg-blue-600 text-white w-full py-1 rounded hover:bg-blue-700"
+                onClick={()=> handleAddToWatchList(product)}>
+                  Add to WatchList
+                </button>
                 <p className="text-sm text-gray-500 mb-2">₹{product.price}</p>
                 <button className="bg-blue-600 text-white w-full py-1 rounded hover:bg-blue-700" 
                 onClick={()=> handleAddToCart(product)}>

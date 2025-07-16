@@ -1,5 +1,5 @@
 import React from "react";
-import { FaShoppingCart, FaUser, FaBars } from "react-icons/fa";
+import { FaShoppingCart, FaUser, FaBars, FaRegHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -39,6 +39,9 @@ const Header = () => {
           <div className="md:hidden">
             <FaBars className="cursor-pointer hover:text-blue-600" />
           </div>
+              <Link to="/watchList">
+            <FaRegHeart  className="cursor-pointer hover:text-blue-600" /> 
+              </Link>
         </div>
       </div>
     </header>
