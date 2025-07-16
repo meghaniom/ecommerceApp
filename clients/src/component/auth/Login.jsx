@@ -29,6 +29,7 @@ const Login = () => {
       setLoginError("");
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.role); 
+      localStorage.setItem("userId", response.data.user._id);
     } else {
       setLoginError(res.error); 
       setLoginSuccess("");
