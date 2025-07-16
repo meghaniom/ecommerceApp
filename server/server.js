@@ -32,7 +32,7 @@ app.use('/uploads',express.static('uploads'));
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/product",productRoutes );
 app.use("/api/v1/cart",cartRoutes);
-app.use("/api/v1/watchList",watchListRoutes);
+app.use("/api/v1/watchList", watchListRoutes)
 
 
 app.listen(PORT, () => {
