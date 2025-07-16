@@ -43,7 +43,7 @@ const WatchList = () => {
                 key={product._id}
                 className="bg-white p-4 rounded-md shadow-sm relative"
               >
-                <div className="h-60 bg-gray-200 mb-4 rounded-md overflow-hidden">
+                <div className="h-90 bg-gray-200 mb-4 rounded-md overflow-hidden">
                   {product.image ? (
                     <img
                       src={`http://localhost:3000/uploads/${product.image}`}
