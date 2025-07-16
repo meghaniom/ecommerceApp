@@ -4,7 +4,6 @@ const dbConnect = require('./config/dbConnect');
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoute');
 const cartRoutes = require('./routes/cartRoute');
-
 const cors = require('cors');
 
 const app = express();
@@ -33,8 +32,6 @@ app.use('/uploads',express.static('uploads'));
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/product",productRoutes );
 app.use("/api/v1/cart",cartRoutes);
-
-
 
 
 app.listen(PORT, () => {

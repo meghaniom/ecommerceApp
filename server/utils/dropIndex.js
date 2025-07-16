@@ -14,4 +14,4 @@ const User = require('../models/userModel');
     finally {
           process.exit();
     }
-})
+});
