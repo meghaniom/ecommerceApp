@@ -8,12 +8,14 @@ const Cart = () => {
   useEffect(() => {
     const fetchCart = async () => {
       const result = await getCart();
+      console.log("result", result);
+
       if (result.cartItems) {
         setCartItems(result.cartItems);
         setTotalPrice(result.totalPrice);
       } else {
-        setCartItems([]);
-        setTotalPrice(0);
+        // setCartItems([]);
+        // setTotalPrice(0);
         console.error("Failed to load cart");
       }
     };
@@ -66,6 +68,11 @@ const Cart = () => {
                 <p className="text-gray-700 font-medium">
                   ₹{item.productId?.price * item.quantity}
                 </p>
+
+
+
+                {/* <p className="text-gray-800 font-medium">₹{item.productId?.totalPrice}</p> */}
+
               </div>
             );
           })}
