@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL } from "../../config/constans";
-import { data } from "react-router-dom";
+// import { data } from "react-router-dom";
 
  export  const addCart = async (data) => {
     try {
@@ -20,7 +20,7 @@ import { data } from "react-router-dom";
     }
  };
 
-  export const removeCart = async(data) => {
+  export const removeCart = async (productId) => {
     try {
         const token = localStorage.getItem("token");
 
@@ -30,8 +30,8 @@ import { data } from "react-router-dom";
             },
             data : {productId},
         });
-        console.log(response.data.message);
-        return response.data.message;
+        console.log(response.data);
+        return response.data.message|| "Product removed successfully";
     }
     catch(error) {
         console.log(error);
@@ -47,8 +47,8 @@ import { data } from "react-router-dom";
                 Authorization : `Bearer ${token}`,
             }
         });
-        console.log(response.data.message);
-        return response.data.message;
+        console.log(response.data);
+        return response.data;
     }
     catch(error) {
         console.log(error);
