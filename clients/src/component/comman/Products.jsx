@@ -3,46 +3,60 @@ import { getProduct } from "../../service/product/Product";
 import { addCart } from "../../service/cart";
 import { addWatchList } from "../../service/watchList";
 
-
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [watchListProductIds, setWatchListProductIds] = useState([]);
+  const token = localStorage.getItem("token");
+
+  const decoded = token ? jwtDecode(token) : null;
+  const userId = decoded?._id || decoded?.id;
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchData = async () => {
       const result = await getProduct();
-      console.log("result", result);
+      const watchListRes = await getWatchList(userId);
 
-      if (result?.products) {
-        setProducts(result.products);
-      } else {
-        console.error("Failed to load products:", result.message || result);
-      }
+      const ids =
+        watchListRes?.watchListItems?.map((item) => item.productId._id) || [];
+
+      if (result?.products) setProducts(result.products);
+      setWatchListProductIds(ids);
       setLoading(false);
     };
-    fetchProducts();
-  }, []);
 
-   const handleAddToCart =async (product)=> {
+    if (userId) fetchData();
+  }, [userId]);
+
+  const handleAddToCart = async (product) => {
     const data = {
-      productId : product._id,
+      productId: product._id,
       quantity: 1,
     };
     const result = await addCart(data);
     alert(result);
-   };
+  };
 
-   const handleAddToWatchList = (product) => {
+  const handleAddToWatchList = async (product) => {
     const data = {
-      productId : product._id,
-    watchList : true,
+      productId: product._id,
+      userId,
+      watchList: true,
     };
-
-    const result = addWatchList(data);
+    const result = await addWatchList(data);
+    if (result.toLowerCase().includes("success")) {
+      setWatchListProductIds((prev) => [...prev, product._id]);
+    }
     alert(result);
-    console.log("WatchList added:", result);
-    
-   }
+  };
+  const handleRemoveFromWatchList = async (product) => {
+    const result = await removeWatchList(userId, product._id);
+    if (result.toLowerCase().includes("success")) {
+      setWatchListProductIds((prev) => prev.filter((id) => id !== product._id));
+    }
+    alert(result);
+  };
+
   return (
     <section className="py-16 px-6 bg-gray-100">
       <h2 className="text-2xl font-semibold mb-6 text-gray-800 max-w-7xl mx-auto">
@@ -56,7 +70,7 @@ const Products = () => {
             return (
               <div
                 key={product._id}
-                className="bg-white p-4 rounded-md shadow-sm"
+                className="bg-white p-4 rounded-md shadow-sm relative"
               >
                 <div className="h-90 bg-gray-200 mb-4 rounded-md overflow-hidden">
                   {product.image ? (
@@ -71,16 +85,28 @@ const Products = () => {
                     </p>
                   )}
                 </div>
+
+                <div className="absolute top-3 right-3">
+                  {watchListProductIds.includes(product._id) ? (
+                    <FaHeart
+                      className="text-red-600 text-2xl cursor-pointer"
+                      onClick={() => handleRemoveFromWatchList(product)}
+                    />
+                  ) : (
+                    <FaRegHeart
+                      className="text-gray-600 text-2xl cursor-pointer hover:text-red-500"
+                      onClick={() => handleAddToWatchList(product)}
+                    />
+                  )}
+                </div>
                 <h3 className="font-medium text-gray-700 truncate">
                   {product.productTitle}
                 </h3>
-                <button className="bg-blue-600 text-white w-full py-1 rounded hover:bg-blue-700"
-                onClick={()=> handleAddToWatchList(product)}>
-                  Add to WatchList
-                </button>
                 <p className="text-sm text-gray-500 mb-2">₹{product.price}</p>
-                <button className="bg-blue-600 text-white w-full py-1 rounded hover:bg-blue-700" 
-                onClick={()=> handleAddToCart(product)}>
+                <button
+                  className="bg-blue-600 text-white w-full py-1 rounded hover:bg-blue-700"
+                  onClick={() => handleAddToCart(product)}
+                >
                   Add to Cart
                 </button>
               </div>
