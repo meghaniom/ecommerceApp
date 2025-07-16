@@ -9,9 +9,9 @@ const upload = require('../middleware/upload');
 
  router.post('/admin/productAdd', authMiddleware,isAdmin, upload.single('image'),productController.productAdd);
  router.get('/getProduct', authMiddleware , productController.productGet);
- router.delete('/admin/product/:id', authMiddleware , isAdmin, productController.deleteProduct);
+ router.delete('/admin/deleteProduct/:id', authMiddleware , isAdmin, productController.deleteProduct);
  router.patch('/admin/updateProduct/:id', authMiddleware , isAdmin, upload.single('image'),productController.updateProduct);
- router.get('/admin/product/:id',authMiddleware , isAdmin, productController.productsingle);
+ router.get('/admin/singleProduct/:id',authMiddleware , isAdmin, productController.productsingle);
 
 
   module.exports = router;
