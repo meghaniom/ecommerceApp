@@ -15,7 +15,7 @@ required : true
             },
             watchList : {
                 type : Boolean,
-                default : false
+                default : false,
             }
         }
     ]

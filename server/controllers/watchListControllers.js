@@ -15,7 +15,7 @@ exports.addToWatchList = async (req, res) => {
         watchListItems: [
           {
             productId: productId,
-            watchList: true,
+            watchList:  true,
           },
         ],
       });
