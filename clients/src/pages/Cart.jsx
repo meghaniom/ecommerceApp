@@ -8,27 +8,29 @@ const Cart = () => {
   useEffect(() => {
     const fetchCart = async () => {
       const result = await getCart();
+      console.log("result", result);
+
       if (result.cartItems) {
         setCartItems(result.cartItems);
         setTotalPrice(result.totalPrice);
       } else {
-        setCartItems([]);
-        setTotalPrice(0);
+        // setCartItems([]);
+        // setTotalPrice(0);
         console.error("Failed to load cart");
       }
     };
     fetchCart();
   }, []);
 
-  const handelRemove = async(productId)=> {
+  const handelRemove = async (productId) => {
     const msg = await removeCart(productId);
     alert(msg);
     const result = await getCart();
-    if(result?.cartItems) {
-        setCartItems(result.cartItems);
-        setTotalPrice(result.totalPrice);
+    if (result?.cartItems) {
+      setCartItems(result.cartItems);
+      setTotalPrice(result.totalPrice);
     }
-  }
+  };
   return (
     <div className="max-w-5xl mx-auto p-6">
       <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
@@ -53,18 +55,21 @@ const Cart = () => {
                   </h3>
                   <p className="text-gray-500 text-sm">{item.quantity}</p>
                 </div>
-                
-                <button className="text-red-500 text-sm mt-2 hover:underline" onClick={() => handelRemove(item.productId._id)}>
-                        Remove
+
+                <button
+                  className="text-red-500 text-sm mt-2 hover:underline"
+                  onClick={() => handelRemove(item.productId._id)}
+                >
+                  Remove
                 </button>
                 <p className="text-gray-700 font-medium">
                   ₹{item.productId?.price}
                 </p>
                 <p className="text-gray-700 font-medium">
-                ₹{item.productId?.price * item.quantity}
+                  ₹{item.productId?.price * item.quantity}
                 </p>
 
-                <p className="text-gray-800 font-medium">₹{item.totalPrice}</p>
+                {/* <p className="text-gray-800 font-medium">₹{item.productId?.totalPrice}</p> */}
               </div>
             );
           })}

@@ -20,38 +20,37 @@ import { data } from "react-router-dom";
     }
  };
 
-  export const removeCart = async(data) => {
-    try {
-        const token = localStorage.getItem("token");
+export const removeCart = async (productId) => {
+  try {
+    const token = localStorage.getItem("token");
 
-        const response = await axios.delete(`${API_BASE_URL}/cart/removeCart`, {
-            headers : {
-                Authorization : `Bearer ${token}`,
-            },
-            data : {productId},
-        });
-        console.log(response.data.message);
-        return response.data.message;
-    }
-    catch(error) {
-        console.log(error);
-        return error.response.data.message || "Something went wrong";
-    }
-  };
+    const response = await axios.delete(`${API_BASE_URL}/cart/removeCart`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: { productId }, 
+    });
 
-   export const getCart = async()=> {
-    try {
-        const token = localStorage.getItem("token");
-        const response = await axios.get(`${API_BASE_URL}/cart/getCart`, {
-            headers : {
-                Authorization : `Bearer ${token}`,
-            }
-        });
-        console.log(response.data.message);
-        return response.data.message;
-    }
-    catch(error) {
-        console.log(error);
-       return { cartItems: [], totalPrice: 0, error: "Something went wrong" };
-    }
-   };
+    return response.data.message;
+  } catch (error) {
+    console.log(error);
+    return error.response?.data?.message || "Something went wrong";
+  }
+};
+
+   export const getCart = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await axios.get(`${API_BASE_URL}/cart/getCart`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return { cartItems: [], totalPrice: 0, error: "Something went wrong" };
+  }
+};
