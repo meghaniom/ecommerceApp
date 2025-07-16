@@ -6,6 +6,6 @@ const watchListController = require('../controllers/watchListControllers');
 
  router.post('/addWatchList',authMiddleware, watchListController.addToWatchList);
  router.get('/getWatchList/:userId',authMiddleware, watchListController.getwatchList);
- router.delete('/removewatchList/:userId',authMiddleware, watchListController.removeWatchList);
+ router.delete('/removewatchList/:userId/:productId',authMiddleware, watchListController.removeWatchList);
   
  module.exports = router;
