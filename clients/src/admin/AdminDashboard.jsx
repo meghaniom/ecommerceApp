@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { getProduct } from '../service/product/Product';
 import { deleteProduct } from '../service/admin';
 import { FaTrash } from 'react-icons/fa';
+import {Link} from 'react-router-dom'
 
 
 const AdminDashboard = () => {
@@ -60,6 +61,11 @@ const AdminDashboard = () => {
                                     <p className='text-gray-600 text-sm mb-2'>₹{product.price}
 
                                     </p>
+                                    <Link to={`/adminUpdate/${product._id}`} className ="text-blue-500 hover:underline text-sm px-3 py-1 rounded inline-block"
+                                    >
+                                        Edit
+                                    </Link>
+
                                     <button 
                                     onClick={() => handelDeleteProduct(product._id)}
                                     className='absolute top-3 right-3 bg-red-500 text-white p-1 rounded hover:bg-red-700' title="Delete Product">

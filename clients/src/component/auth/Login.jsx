@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Loginuser } from '../../service/auth';
+import { Navigate } from 'react-router-dom';
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -28,11 +29,12 @@ const Login = () => {
       setLoginError("");
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.role); 
-       localStorage.setItem("userId", response.data.user._id);
+       localStorage.setItem("userId", res.data.user._id);
     } else {
       setLoginError(res.error); 
       setLoginSuccess("");
     }
+    Navigate("/homePage");
   };
 
   return (

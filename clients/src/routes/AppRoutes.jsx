@@ -8,6 +8,7 @@ import ProductAdd from '../admin/ProductAdd'
 import Cart from '../pages/Cart'
 import WatchList from '../pages/WatchList'
 import AdminDashboard from '../admin/AdminDashboard'
+import AdminUpdate from '../admin/AdminUpdate'
 const AppRoutes = () => {
   return (
    <BrowserRouter>
@@ -17,6 +18,7 @@ const AppRoutes = () => {
    <Route path='/homePage' element= {<HomePage/>} />
    <Route path='/adminAddProduct' element ={<ProductAdd/>} />
    <Route path='/adminDashboard' element ={<AdminDashboard/>} />
+   <Route path='/adminUpdate/:productId' element = {<AdminUpdate/>} />
 
    <Route path='/cart' element={<Cart/>} />
    <Route path='/watchList' element ={<WatchList/>} />

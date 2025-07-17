@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL } from "../../config/constans";
-import { data } from "react-router-dom";
+
 
 
 export const addProduct = async (addData) => {
@@ -74,8 +74,8 @@ export const deleteProduct = async (productId) => {
             },
 
         });
-        console.log(response.data.message);
-        return response.data.message || "Productfetch successfully";
+        console.log(response.data);
+        return response.data || "Productfetch successfully";
     }
     catch(error) {
         console.error(error.message);
