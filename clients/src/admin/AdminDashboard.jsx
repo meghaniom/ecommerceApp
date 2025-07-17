@@ -33,13 +33,15 @@ const AdminDashboard = () => {
   // Handle product deletion
   const handleDeleteProduct = async (productId) => {
     try {
-      const result = await deleteProduct(productId);
-      alert(result);
-      if (typeof result === 'string' && result.toLowerCase().includes("success")) {
+         const  result = await deleteProduct(productId);
+       alert(result);
+       if(result.toLowercase().includes("success")) {
         setProducts((prev) => prev.filter((product) => product._id !== productId));
-      }
-      console.log("Product deleted result:", result);
-    } catch (error) {
+       } 
+       console.log("Procuct deleted successfully:", result);
+        fetchProducts();
+     }
+     catch (error) {
       console.error("Failed to delete product:", error);
       alert("Error deleting product.");
     }
