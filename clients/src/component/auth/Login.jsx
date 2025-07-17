@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { Loginuser } from '../../service/auth';
-import { useNavigate } from 'react-router-dom';
+
+import {  useNavigate } from 'react-router-dom';
+
+
+
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -30,15 +34,15 @@ const Login = () => {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.role); 
 
-      
-
-       localStorage.setItem("userId", res.data.userId);
+       localStorage.setItem("userId", res.data.user._id);
 
     } else {
       setLoginError(res.error); 
       setLoginSuccess("");
     }
-    navigate('/homePage')
+
+    navigate("/homePage");
+
   };
 
   return (
