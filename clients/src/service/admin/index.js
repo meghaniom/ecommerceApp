@@ -57,8 +57,8 @@ export const deleteProduct = async (productId) => {
         data: { productId },
       }
     );
-    console.log(response.data.message)
-    return response.data.message || "Product deleted successfully";
+    console.log(response.data)
+    return response.data|| "Product deleted successfully";
   } catch (error) {
     console.error(error.message);
     return error?.response?.data?.message || "Something went wrong";
@@ -68,15 +68,15 @@ export const deleteProduct = async (productId) => {
  export const singleProduct = async (productId) => {
     const token = localStorage.getItem("token");
     try{
-        const response = await axios.get(`${API_BASE_URL}/product/admin/signleProduct/${productId}`, {
+        const response = await axios.get(`${API_BASE_URL}/product/admin/singleProduct/${productId}`, {
             headers : {
                 Authorization : `Bearer ${token}`,
                 "Content-Type" : "application/json",
             },
 
         });
-        console.log(response.data.message);
-        return response.data.message || "Productfetch successfully";
+        console.log(response.data);
+        return response.data || "Productfetch successfully";
 
     }
     catch(error) {

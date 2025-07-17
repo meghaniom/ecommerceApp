@@ -21,6 +21,7 @@ import WatchList from '../pages/WatchList'
 
 
 import AdminDashboard from '../admin/AdminDashboard'
+import AdminUpdate from '../admin/AdminUpdate'
 
 const AppRoutes = () => {
   return (
@@ -43,6 +44,7 @@ const AppRoutes = () => {
 
    <Route path='/adminAddProduct' element ={<ProductAdd/>} />
    <Route path='/adminDashboard' element ={<AdminDashboard/>} />
+   <Route path='/adminUpdate/:productId' element = {<AdminUpdate/>}/>
 
 
    <Route path='/cart' element={<Cart/>} />

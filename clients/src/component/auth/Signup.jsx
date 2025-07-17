@@ -40,7 +40,7 @@ const Signup = () => {
       setSuccess(result.data.message);
       setFormData({email: "", password : "", role:"customer",userName: ""});
     }
-  
+   
     else {
        setError(result.error);
 

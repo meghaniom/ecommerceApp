@@ -32,13 +32,13 @@ const Login = () => {
 
       
 
-       localStorage.setItem("userId", response.data.user._id);
+       localStorage.setItem("userId", res.data.userId);
 
     } else {
       setLoginError(res.error); 
       setLoginSuccess("");
     }
-    navigate('/homepage')
+    navigate('/homePage')
   };
 
   return (

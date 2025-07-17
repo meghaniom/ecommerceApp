@@ -26,6 +26,10 @@ const AdminUpdate = () => {
      useEffect(() => {
         const fetchProduct = async () => {
             const data = await singleProduct(productId);
+            
+            if(!data?.productId) {
+                navigate("/adminDashboard");
+             }
             if(data) {
                 setProductData({
                     productTitle : data.productTitle,
@@ -36,6 +40,7 @@ const AdminUpdate = () => {
                     image : data.image,
                 });
             };
+             
             setLoading(false);
         }
         fetchProduct();
