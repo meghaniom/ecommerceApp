@@ -22,9 +22,9 @@ export const getWatchList = async (userId) => {
     const response = await axios.get(`${API_BASE_URL}/watchList/getWatchList/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
-      },
+      },data :{ userId},
     });
-    return response.data;
+    return response.data || "WatchList fetched successfully";
   } catch (error) {
     console.error(error);
     return error.response?.data?.message || "Something went wrong";

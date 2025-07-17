@@ -8,6 +8,7 @@ import { API_BASE_URL } from "../../config/constans";
             headers : {
                 Authorization : `Bearer ${token}`,
             }
+            
         });
         console.log(response.data);
         

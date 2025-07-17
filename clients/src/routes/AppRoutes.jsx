@@ -12,13 +12,30 @@ import WatchList from "../pages/WatchList";
 
 import AdminDashboard from "../admin/AdminDashboard";
 import AdminUpdate from "../admin/AdminUpdate";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element= {<Signup/>}/>
+        <Route path="/login" element ={<Login/>} />
+
+        {/* user routes */}
+        <Route  element={ <ProtectedRoutes allowedRoles={['customer']}/> }/>
+        <Route path="/homePage" element ={<HomePage/>}/>
+        <Route path="/cart" element ={<Cart/>} />
+        <Route path="/watchList" element={<WatchList/>}/>
+
+
+         {/* admin routes */}
+         <Route element={<ProtectedRoutes allowdRoles={['admin']}/>}/>
+         <Route path="/adminAddProduct" element={<ProductAdd/>}/>
+         <Route path="/adminDashboard" element={<AdminDashboard/>}/>
+         <Route path="/adminUpdate/:productId" element={<AdminUpdate/>}/>
+
+        {/* <Route path="/" element={<Signup />} />
+        <Route path="/login" 1element={<Login />} />
 
         <Route path="/homePage" element={<HomePage />} />
 
@@ -31,7 +48,7 @@ const AppRoutes = () => {
 
         <Route path="/cart" element={<Cart />} />
 
-        <Route path="/watchList" element={<WatchList />} />
+        <Route path="/watchList" element={<WatchList />} /> */}
       </Routes>
     </BrowserRouter>
   );

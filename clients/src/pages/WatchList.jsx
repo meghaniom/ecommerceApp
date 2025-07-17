@@ -1,30 +1,40 @@
 import { jwtDecode } from "jwt-decode";
-
-
-import  { useEffect, useState } from "react";
-
+import { useEffect, useState } from "react";
 import { getWatchList } from "../service/watchList";
 
 const WatchList = () => {
   const [watchListItems, setWatchListItems] = useState([]);
   const token = localStorage.getItem("token");
-  const decoded = token ? jwtDecode(token) : null;
-  const userId = decoded?._id || decoded?.id;
+
+  // Validate and decode token
+  let userId = null;
+  if (token) {
+    try {
+      const decoded = jwtDecode(token);
+      userId = decoded?._id || decoded?.id;
+    } catch (err) {
+      console.error("Invalid token:", err);
+    }
+  }
 
   useEffect(() => {
     const fetchWatchList = async () => {
-      if (!userId) return;
+      if (!userId) return; 
+
       const result = await getWatchList(userId);
+
       if (Array.isArray(result?.watchListItems)) {
         setWatchListItems(result.watchListItems);
       } else {
         console.error(
-          "Invalid watchListItems format :",
+          "Invalid watchListItems format:",
           result.message || result
         );
       }
     };
-    fetchWatchList();
+    if (userId) {
+      fetchWatchList();
+    }
   }, [userId]);
 
   return (
@@ -59,7 +69,7 @@ const WatchList = () => {
                 <h3 className="font-medium text-gray-700 truncate">
                   {product.productTitle}
                 </h3>
-                <p className="text-sm text-gray-500 mb-2">{product.price}</p>
+                <p className="text-sm text-gray-500 mb-2">₹{product.price}</p>
               </div>
             );
           })}
@@ -69,6 +79,4 @@ const WatchList = () => {
   );
 };
 
-
 export default WatchList;
-

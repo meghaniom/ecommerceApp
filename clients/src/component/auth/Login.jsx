@@ -34,7 +34,7 @@ const Login = () => {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("role", res.data.role); 
 
-       localStorage.setItem("userId", res.data.user._id);
+       localStorage.setItem("userId", res.data.userId);
 
     } else {
       setLoginError(res.error); 
