@@ -62,7 +62,7 @@ const AdminDashboard = () => {
                 <div className="h-48 bg-gray-100 mb-3 overflow-hidden rounded">
                   {product.image ? (
                     <img
-                      src={`http://localhost:3000/server/uploads/${product.image}`}
+                      src={`http://localhost:3000/uploads/${product.image}`}
                       alt={product.productTitle}
                       className="w-full h-full object-cover"
                     />

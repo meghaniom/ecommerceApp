@@ -1,17 +1,27 @@
-import React from "react";
+
 import { FaShoppingCart, FaUser, FaBars, FaRegHeart } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
+import { logoutuser } from "../../service/auth";
 
 const Header = () => {
+  const navigate  = useNavigate();
+   const  logout = async() => {
+    const  data =   await logoutuser();
+    if (data.success === true) {
+      localStorage.removeItem("user");
+      localStorage.removeItem("role");
+      localStorage.removeItem("token");
+     navigate("/login");
+    }
+    else {
+      console.error("Logout failed:", data.error);
+      alert("Logout failed. Please try again Later.");
+    }
+   }
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <div className="text-2xl font-bold text-blue-600">ShopEase</div>
-
-
-       
-
-
 
         <nav className="hidden md:flex space-x-6 text-gray-700 font-medium">
           <a href="/" className="hover:text-blue-600">
@@ -27,9 +37,6 @@ const Header = () => {
             Contact
           </a>
         </nav>
-
-    
-
 
         <div className="hidden lg:flex items-center border border-gray-300 rounded-md px-2 py-1 w-72">
           <input
@@ -47,16 +54,16 @@ const Header = () => {
           <div className="md:hidden">
             <FaBars className="cursor-pointer hover:text-blue-600" />
           </div>
-              <Link to="/watchList">
-            <FaRegHeart  className="cursor-pointer hover:text-blue-600" /> 
-              </Link>
+          <Link to="/watchList">
+            <FaRegHeart className="cursor-pointer hover:text-blue-600" />
+          </Link>
+          <button onClick={logout} className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+    Logout
+          </button>
         </div>
       </div>
     </header>
   );
 };
 
-
 export default Header;
-
-

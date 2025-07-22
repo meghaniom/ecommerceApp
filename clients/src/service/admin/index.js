@@ -1,8 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL } from "../../config/constans";
 
-
-
 export const addProduct = async (addData) => {
   try {
     const token = localStorage.getItem("token");
@@ -23,11 +21,12 @@ export const addProduct = async (addData) => {
   }
 };
 
-export const updateProduct = async (productId) => {
+export const updateProduct = async (productId, updateData) => {
   const token = localStorage.getItem("token");
   try {
     const response = await axios.patch(
       `${API_BASE_URL}/product/admin/updateProduct/${productId}`,
+      updateData,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -36,6 +35,7 @@ export const updateProduct = async (productId) => {
         data: { productId },
       }
     );
+    console.log("response.data", response.data);
     return response.data.message || "Product updated successfully";
   } catch (error) {
     console.error(error.message);
@@ -45,41 +45,42 @@ export const updateProduct = async (productId) => {
 
 export const deleteProduct = async (productId) => {
   const token = localStorage.getItem("token");
+  console.log("productId", productId);
   try {
     const response = await axios.delete(
       `${API_BASE_URL}/product/admin/deleteProduct/${productId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
         data: { productId },
       }
     );
-    console.log(response.data)
-    return response.data|| "Product deleted successfully";
+    console.log(response.data);
+    return response.data || "Product deleted successfully";
   } catch (error) {
     console.error(error.message);
     return error?.response?.data?.message || "Something went wrong";
   }
 };
 
- export const singleProduct = async (productId) => {
-    const token = localStorage.getItem("token");
-    try{
-        const response = await axios.get(`${API_BASE_URL}/product/admin/singleProduct/${productId}`, {
-            headers : {
-                Authorization : `Bearer ${token}`,
-                "Content-Type" : "application/json",
-            },
-
-        });
-        console.log(response.data);
-        return response.data || "Productfetch successfully";
-
-    }
-    catch(error) {
-        console.error(error.message);
-        return error?.response?.data?.message || "Something went wrong";
-    }
- };
+export const singleProduct = async (productId) => {
+  const token = localStorage.getItem("token");
+  try {
+    const response = await axios.get(
+      `${API_BASE_URL}/product/admin/singleProduct/${productId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(response.data);
+    return response.data || "Productfetch successfully";
+  } catch (error) {
+    console.error(error.message);
+    return error?.response?.data?.message || "Something went wrong";
+  }
+};

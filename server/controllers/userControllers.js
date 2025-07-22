@@ -84,9 +84,9 @@ exports.register = async (req, res) => {
 
   exports.logout = async(req, res) => {
     try {
-      res.status(200).json({message : "Logout successfully"});
+      res.status(200).json({success: true, message : "Logout successfully"});
     }
     catch (error) {
-       res.status(500).json({message : "Something went wrong.", error : error.message});
+       res.status(500).json({success : false ,message : "Something went wrong.", error : error.message});
     }
   };

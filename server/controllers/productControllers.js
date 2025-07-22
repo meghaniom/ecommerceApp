@@ -70,7 +70,7 @@ exports.updateProduct = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    // Delete old image if new one is uploaded
+   
     if (newImage && product.image) {
       const oldImagePath = path.join(__dirname, "..", "uploads", product.image);
       fs.unlink(oldImagePath, (err) => {
@@ -88,11 +88,13 @@ exports.updateProduct = async (req, res) => {
       price,
       category,
       stock,
+      image
+    
     };
-
     if (newImage) {
       updateFields.image = newImage;
     }
+    console.log('updateFields',updateFields);
 
     const updatedProduct = await Product.findByIdAndUpdate(id, updateFields, {
       new: true,

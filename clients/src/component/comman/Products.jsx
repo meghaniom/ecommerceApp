@@ -77,55 +77,55 @@ const Products = () => {
         <p className="text-center text-gray-500">Loading...</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
-          {products.map((product) => {
-            return (
-              <div
-                key={product._id}
-                className="bg-white p-4 rounded-md shadow-sm relative"
-              >
-                <div className="h-90 bg-gray-200 mb-4 rounded-md overflow-hidden">
-                  {product.image ? (
-                    <img
-                      src={`http://localhost:3000/uploads/${product.image}`}
-                      alt={product.productTitle}
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <p className="text-gray-400 text-sm text-center mt-16">
-                      {" "}
-                      No Image
-                    </p>
-                  )}
-                </div>
-                <div className="absolute top-3 right-3">
-                  {watchListProductIds.includes(product._id) ? (
-                    <FaHeart
-                      className="text-red-600 text-2xl cursor-pointer"
-                      onClick={() => handleRemoveFromWatchList(product)}
-                    />
-                  ) : (
-                    <FaRegHeart
-                      className="text-gray-600 text-2xl cursor-pointer hover:text-red-500"
-                      onClick={() => handleAddToWatchList(product)}
-                    />
-                  )}
-                </div>
-                <h3 className="font-medium text-gray-700 truncate">
-                  {product.productTitle}
-                </h3>
-                <p className="text-sm text-gray-500 mb-2">₹{product.price}</p>
-                <div className="absolute top-3 right-3">
-                  {watchListProductIds.in}
-                </div>
-                <button
-                  className="bg-blue-600 text-white w-full py-1 rounded hover:bg-blue-700"
-                  onClick={() => handleAddToCart(product)}
-                >
-                  Add to Cart
-                </button>
-              </div>
-            );
-          })}
+
+         {products.map((product) => (
+  <div
+    key={product._id}
+    className="bg-white p-4 rounded-md shadow-sm relative"
+  >
+    <p className="text-gray-500 text-sm text-center mt-2">
+      {product.category}
+    </p>
+
+    <div className="h-90 bg-gray-200 mb-4 rounded-md overflow-hidden">
+      {product.image ? (
+        <img
+          src={`http://localhost:3000/uploads/${product.image}`}
+          alt={product.productTitle}
+          className="h-full w-full object-cover"
+        />
+      ) : (
+        <p className="text-gray-400 text-sm text-center mt-16">No Image</p>
+      )}
+    </div>
+
+    <div className="absolute top-3 right-3">
+      {watchListProductIds.includes(product._id) ? (
+        <FaHeart
+          className="text-red-600 text-2xl cursor-pointer"
+          onClick={() => handleRemoveFromWatchList(product)}
+        />
+      ) : (
+        <FaRegHeart
+          className="text-gray-600 text-2xl cursor-pointer hover:text-red-500"
+          onClick={() => handleAddToWatchList(product)}
+        />
+      )}
+    </div>
+
+    <h3 className="font-medium text-gray-700 truncate">
+      {product.productTitle}
+    </h3>
+    <p className="text-sm text-gray-500 mb-2">₹{product.price}</p>
+
+    <button
+      className="bg-blue-600 text-white w-full py-1 rounded hover:bg-blue-700"
+      onClick={() => handleAddToCart(product)}
+    >
+      Add to Cart
+    </button>
+  </div>
+))}
         </div>
       )}
     </section>
